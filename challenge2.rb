@@ -20,18 +20,22 @@ end
 
 def reverse_list(list, previous=nil)
 
-  tail = list
+  tail = list  #mark the end of the list
   previous_node = LinkedListNode.new(list.value, list.next_node) 
 
+  #move up the list 
   while list.next_node != nil
     previous_node = list
     list = list.next_node
   end 
 
-  previous_node.next_node = nil
+  #mark the node to be altered in the next iteration
+  previous_node.next_node = nil  
 
-  list.next_node = ObjectSpace._id2ref(previous_node.object_id)
+  #change the direction the node is pointed to (from the subsequent node to the previous one)
+  list.next_node = ObjectSpace._id2ref(previous_node.object_id) 
 
+  #repeat until all nodes have been redirected, ie, when the tail is the one being altered
   if previous_node != tail
     reverse_list(tail)
   end
